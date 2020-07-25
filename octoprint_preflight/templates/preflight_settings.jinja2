@@ -1,0 +1,73 @@
+<form id="plugin_preflight_settings" class="form-horizontal">
+
+    <h3>{{ _('Preflight Settings') }}</h3>
+
+    <div class="control-group">
+
+        <legend>{{ _('Checklist Items') }}</legend>
+        <!-- TODO make this UI way, way less awful -->
+
+        <div class="help-block">
+            The checklist is defined as a JSON array of objects with the required property <code>item</code> and
+            optional property <code>directions</code>.
+        </div>
+
+        <label for="checklist" class="control-label">{{ _('Checklist JSON') }}</label>
+        <div class="controls">
+            <textarea
+                    id="auth_user"
+                    type="text"
+                    class="input-block-level"
+                    data-bind="value: settings.plugins.preflight.checklist"
+                    placeholder='[{"item":"Clear the bed", "directions": "Make sure the bed is empty!"}]'
+                    rows="10"
+            >
+            </textarea>
+        </div>
+    </div>
+
+    <div class="control-group">
+
+        <legend>{{ _('Fiddly Details') }}</legend>
+
+        <label for="title" class="control-label">{{ _('Title') }}</label>
+        <div class="controls">
+            <input id="title" type="text" class="input-block-level"
+                   data-bind="value: settings.plugins.preflight.title"
+                   placeholder="Preflight">
+            <span class="help-inline">Preflight checklist title when displayed to users.</span>
+        </div>
+
+        <label for="timeout" class="control-label">{{ _('Timeout') }}</label>
+        <div class="controls">
+            <input id="timeout" type="text" class="input-block-level"
+                   data-bind="value: settings.plugins.preflight.timeout"
+                   placeholder="300">
+            <span class="help-inline">How long to wait (in seconds) before canceling a print without preflight interaction.</span>
+        </div>
+
+        <label for="checked" class="control-label">{{ _('Checked') }}</label>
+        <div class="controls">
+            <input id="checked" type="text" class="input-block-level"
+                   data-bind="value: settings.plugins.preflight.checked"
+                   placeholder="&#128505;">
+            <span class="help-inline">Glyph to represent a checked item.</span>
+        </div>
+
+        <label for="unchecked" class="control-label">{{ _('Unchecked') }}</label>
+        <div class="controls">
+            <input id="unchecked" type="text" class="input-block-level"
+                   data-bind="value: settings.plugins.preflight.checked"
+                   placeholder="&#9744;">
+            <span class="help-inline">Glyph to represent an unchecked item.</span>
+        </div>
+
+        <label for="allow_bypass" class="control-label">{{ _('Allow Bypass') }}</label>
+        <div class="controls">
+            <input id="allow_bypass" type="checkbox" class="input-block-level"
+                   data-bind="checked: settings.plugins.preflight.allow_bypass">
+            <span class="help-inline">Whether or not to enable the <code>ALLOW_PREFLIGHT_BYPASS</code> permission.</span>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,45 @@
+#plugin_preflight_modal .checklist {
+    display: grid;
+    flex-direction: column;
+}
+
+#plugin_preflight_modal .checklist-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+#plugin_preflight_modal .checkbox {
+    grid-column: 1;
+}
+
+#plugin_preflight_modal .checklist-item.unchecked .checkbox.checked, #plugin_preflight_modal .checklist-item.checked .checkbox.unchecked {
+    display: none
+}
+
+#plugin_preflight_modal .checklist-item.checked .checkbox.checked, #plugin_preflight_modal .checklist-item.unchecked .checkbox.unchecked {
+    display: inline;
+}
+
+#plugin_preflight_modal .item {
+    grid-column: 2;
+    font-weight: bold;
+}
+
+#plugin_preflight_modal .checkbox {
+    margin-right: 0.5em;
+    color: #04c;
+    width: 1.25em;
+}
+
+#plugin_preflight_modal .directions {
+    grid-column: 2;
+    font-size: larger;
+    margin-top: 0.5em;
+}
+
+#plugin_preflight_modal .checkbox, #plugin_preflight_modal .item {
+    font-size: x-large;
+}
