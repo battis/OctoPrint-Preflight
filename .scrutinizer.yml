@@ -1,10 +1,15 @@
+checks:
+  python:
+    code_rating: true
+    duplicate_code: true
+
 build:
   environment:
     python:
       version: 3.7.1
       virtualenv: true
-    apt_packages:
-      - python-dev
-      - libldap2-dev
-      - libsasl2-dev
-      - libssl-dev
+  nodes:
+    analysis:
+      tests:
+        override:
+          - py-scrutinizer-run
