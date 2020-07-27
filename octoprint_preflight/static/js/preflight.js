@@ -72,6 +72,7 @@ $(function () {
         async function showPreflightDialog() {
             const settings = await OctoPrint.settings.getPluginSettings(PLUGIN_ID);
             const checklist = DIALOG.querySelector('.checklist');
+            checklist.innerHTML = "";
             let index = 0;
             for (const item of settings['checklist']) {
                 checklistItem(checklist, item, ++index, settings)

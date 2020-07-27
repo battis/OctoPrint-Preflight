@@ -60,7 +60,7 @@ class PreflightPlugin(SettingsPlugin,
 		elif Events.PLUGIN_PREFLIGHT_COMPLETED == event and self.preflight_state == self.State.STARTED:
 			self._enter_state_complete()
 			self._printer.resume_print(self._identifier)
-		elif event in [Events.PRINT_CANCELLED, Events.PRINT_DONE, Events.PRINT_FAILED]:
+		elif event in [Events.PRINT_CANCELLING, Events.PRINT_DONE, Events.PRINT_FAILED]:
 			self._enter_state_waiting()
 
 	# ~~ SimpleApiPlugin mixin
