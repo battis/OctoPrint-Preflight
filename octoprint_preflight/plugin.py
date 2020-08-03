@@ -5,7 +5,8 @@ from enum import Enum
 
 import flask
 from octoprint.events import Events
-from octoprint.plugin import SettingsPlugin, AssetPlugin, EventHandlerPlugin, TemplatePlugin, SimpleApiPlugin
+from octoprint.plugin import SettingsPlugin, AssetPlugin, EventHandlerPlugin, TemplatePlugin, SimpleApiPlugin, \
+	ReloadNeedingPlugin
 
 
 # TODO display file and user of print job in preflight checklist
@@ -16,7 +17,8 @@ class PreflightPlugin(SettingsPlugin,
 					  AssetPlugin,
 					  TemplatePlugin,
 					  EventHandlerPlugin,
-					  SimpleApiPlugin):
+					  SimpleApiPlugin,
+					  ReloadNeedingPlugin):
 	class State(Enum):
 		WAITING = "waiting"
 		STARTED = "started"
@@ -108,7 +110,7 @@ class PreflightPlugin(SettingsPlugin,
 
 	def get_assets(self):
 		return dict(
-			js=["js/preflight.js", "js/settings.js"],
+			js=["js/preflight.js"],
 			css=["css/preflight.css"]
 		)
 

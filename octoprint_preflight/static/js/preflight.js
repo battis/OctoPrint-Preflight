@@ -6,9 +6,9 @@
  */
 
 $(function () {
+    const PLUGIN_ID = 'preflight';
     function PreflightViewModel(parameters) {
 
-        const PLUGIN_ID = 'preflight';
         const START = 'start';
         const COMPLETE = 'complete';
 
