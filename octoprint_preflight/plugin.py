@@ -118,7 +118,7 @@ class PreflightPlugin(SettingsPlugin,
 	def get_template_configs(self):
 		return [
 			dict(type="generic"),
-			dict(type="settings", custom_bindings=False)
+			dict(type="settings", custom_bindings=False),  # must mark custom_bindings False to load settings in GUI
 		]
 
 	# ~~ Softwareupdate hook
