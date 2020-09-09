@@ -1,9 +1,8 @@
 # coding=utf-8
 from __future__ import absolute_import
 
-from enum import Enum
-
 import flask
+from enum import Enum
 from octoprint.events import Events
 from octoprint.plugin import SettingsPlugin, AssetPlugin, EventHandlerPlugin, TemplatePlugin, SimpleApiPlugin, \
 	ReloadNeedingPlugin
@@ -32,7 +31,7 @@ class PreflightPlugin(SettingsPlugin,
 		self._preflight_state = self.State.WAITING
 
 	@property
-	def preflight_state(self) -> State:
+	def preflight_state(self):
 		return self._preflight_state
 
 	def _enter_state_waiting(self):
