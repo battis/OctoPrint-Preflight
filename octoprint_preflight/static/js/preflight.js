@@ -1,3 +1,6 @@
+/*jslint esversion: 9 */
+/*global $,OctoPrint,OCTOPRINT_VIEWMODELS,UI_API_KEY */
+
 /*
  * View model for OctoPrint-Preflight
  *
@@ -6,8 +9,10 @@
  */
 
 $(function () {
+    "use strict";
     const PLUGIN_ID = 'preflight';
-    function PreflightViewModel(parameters) {
+
+    function PreflightViewModel() {
 
         const START = 'start';
         const COMPLETE = 'complete';
@@ -18,29 +23,29 @@ $(function () {
         const API_CONFIG = {
             url: OctoPrint.getSimpleApiUrl(PLUGIN_ID),
             contentType: 'application/json'
-        }
+        };
         if (UI_API_KEY) {
-            API_CONFIG.headers = {'X-Api-Key': UI_API_KEY}
+            API_CONFIG.headers = {'X-Api-Key': UI_API_KEY};
         }
 
         async function state() {
-            const data = await $.ajax(API_CONFIG)
+            const data = await $.ajax(API_CONFIG);
             if (data.state === 'started') {
-                showPreflightDialog()
+                await showPreflightDialog();
             }
         }
 
         async function fireStartEvent() {
-            await $.ajax({...API_CONFIG, method: 'POST', data: JSON.stringify({command: START})})
+            await $.ajax({...API_CONFIG, method: 'POST', data: JSON.stringify({command: START})});
         }
 
         async function fireCompleteEvent() {
-            await $.ajax({...API_CONFIG, method: 'POST', data: JSON.stringify({command: COMPLETE})})
+            await $.ajax({...API_CONFIG, method: 'POST', data: JSON.stringify({command: COMPLETE})});
         }
 
         function testPreflightComplete() {
             if (DIALOG.querySelectorAll('.checklist-item.unchecked').length === 0) {
-                closePreflightDialog()
+                closePreflightDialog();
             }
         }
 
@@ -53,7 +58,7 @@ $(function () {
                 item.classList.remove('unchecked');
                 item.classList.add('checked');
             }
-            testPreflightComplete()
+            testPreflightComplete();
         }
 
         function checklistItem(checklist, item, index, settings) {
@@ -75,25 +80,25 @@ $(function () {
             checklist.innerHTML = "";
             let index = 0;
             for (const item of settings['checklist']) {
-                checklistItem(checklist, item, ++index, settings)
+                checklistItem(checklist, item, ++index, settings);
             }
             DIALOG.querySelector('.modal-title').innerHTML = settings['title'];
             $(DIALOG).modal({
                 backdrop: 'static',
                 keyboard: false,
                 show: true
-            })
+            });
         }
 
         function closePreflightDialog() {
-            $(DIALOG).modal('hide')
-            fireCompleteEvent()
+            $(DIALOG).modal('hide');
+            fireCompleteEvent();
         }
 
-        self.onEventPrintStarted = function (payload) {
-            showPreflightDialog()
-            fireStartEvent()
-        }
+        self.onEventPrintStarted = function () {
+            showPreflightDialog();
+            fireStartEvent();
+        };
 
         state();
     }
